@@ -1,4 +1,10 @@
 {
-    "compileOnSave": true,
-    "extends": "@tsconfig/node22/tsconfig.json"
+  "compileOnSave": true,
+  "extends": "@tsconfig/node22/tsconfig.json",
+  "compilerOptions": {
+    "sourceMap": true,
+    "sourceRoot": "./src",
+    "outDir": "./dist"
+  },
+  "exclude": ["./dist"]
 }

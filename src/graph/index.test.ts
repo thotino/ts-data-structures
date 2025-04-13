@@ -1,4 +1,5 @@
-const { Graph } = require(".");
+import Graph from ".";
+import { describe, beforeAll, test, expect } from "vitest";
 
 describe("[unit] Graph", () => {
   const graph = new Graph();

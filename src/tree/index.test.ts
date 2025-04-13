@@ -1,4 +1,5 @@
-const { Tree } = require(".");
+import Tree from ".";
+import { describe, beforeAll, test, expect } from "vitest";
 
 describe("[unit] Tree", () => {
   const tree = new Tree(1, "AB");

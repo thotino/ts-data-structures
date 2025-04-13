@@ -3,7 +3,7 @@
  * @description A stack is a linear data structure that behaves like a real-world stack of items.
  */
 class Stack<Type> {
-  items: Type[]
+  items: Type[];
   constructor() {
     this.items = [];
   }

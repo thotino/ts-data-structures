@@ -5,9 +5,9 @@
 class BinarySearchTreeNode<Key, Value> {
   key;
   value;
-  parent;
-  left;
-  right;
+  parent?;
+  left?;
+  right?;
   constructor(
     key: Key,
     value: Value,
@@ -33,7 +33,7 @@ class BinarySearchTreeNode<Key, Value> {
 
 class BinarySearchTree<Key, Value> {
   readonly root;
-  constructor(key: Key, value: Value = key) {
+  constructor(key: Key, value: Value) {
     this.root = new BinarySearchTreeNode(key, value);
   }
 
@@ -59,15 +59,35 @@ class BinarySearchTree<Key, Value> {
     if (node.right) yield* this.inOrderTraversal(node.right);
   }
 
-  insert(key: Key, value: Value = key) {
-    const node = this.root;
+  insert(key: Key, value: Value) {
+    let node = this.root;
     while (true) {
       if (node.key === key) return false;
+      if (node.key > key) {
+        if (node.left !== null) node = node.left;
+        else {
+          node.left = new BinarySearchTreeNode(key, value, node);
+          return true;
+        }
+      } else if (node.key < key) {
+        if (node.right !== null) node = node.right;
+        else {
+          node.right = new BinarySearchTreeNode(key, value, node);
+          return true;
+        }
+      }
     }
+  }
+  
+  has(key: Key) {
+    for (let node of this.postOrderTraversal()) {
+      if (node.key === key) return true;
+    }
+    return false;
   }
 
   remove(key: Key) {
-    for (const node of this.preOrderTraversal()) {
+    for (let node of this.preOrderTraversal()) {
       if (node.key === key) {
         if (node.left) node.left = null;
         if (node.right) node.right = null;

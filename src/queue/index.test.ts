@@ -1,4 +1,5 @@
-const { Queue } = require(".");
+import Queue from ".";
+import { describe, test, expect } from "vitest";
 
 describe("[unit] Queue", () => {
   test("Should be empty at initialization", () => {

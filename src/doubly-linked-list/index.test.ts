@@ -1,4 +1,5 @@
-const { DoublyLinkedList } = require(".");
+import DoublyLinkedList from ".";
+import { describe, beforeAll, test, expect } from "vitest";
 
 describe("[unit] DoublyLinkedList", () => {
   const list = new DoublyLinkedList();

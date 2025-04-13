@@ -5,9 +5,9 @@
 class TreeNode<Key, Value> {
   key;
   value;
-  parent: TreeNode<Key, Value>;
+  parent?: TreeNode<Key, Value>;
   children: TreeNode<Key, Value>[];
-  constructor(key: Key, value = key, parent = null) {
+  constructor(key: Key, value: Value, parent?: TreeNode<Key, Value>) {
     this.key = key;
     this.value = value;
     this.parent = parent;
@@ -58,9 +58,9 @@ class Tree<Key, Value> {
     return false;
   }
 
-  remove(key:Key) {
+  remove(key: Key) {
     for (const node of this.postOrderTraversal()) {
-      const filtered = node.children.filter((child) => child.key !== key);
+      const filtered = node.children.filter((child: TreeNode<Key, Value>) => child.key !== key);
       if (filtered.length !== node.children.length) {
         node.children = filtered;
         return true;

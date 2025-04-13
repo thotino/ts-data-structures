@@ -3,12 +3,18 @@
  * @description A binary tree is a data structure consisting of a set of linked nodes that represent a hierarchical tree structure.
  */
 class BinaryTreeNode<Key, Value> {
-  key;
-  value;
-  parent;
-  left;
-  right;
-  constructor(key, value = key, parent = null, left = null, right = null) {
+  key: Key;
+  value: Value;
+  parent?: BinaryTreeNode<Key, Value>;
+  left?: BinaryTreeNode<Key, Value>;
+  right?: BinaryTreeNode<Key, Value>;
+  constructor(
+    key: Key,
+    value: Value,
+    parent?: BinaryTreeNode<Key, Value>,
+    left?: BinaryTreeNode<Key, Value>,
+    right?: BinaryTreeNode<Key, Value>,
+  ) {
     this.key = key;
     this.value = value;
     this.parent = parent;
@@ -27,7 +33,7 @@ class BinaryTreeNode<Key, Value> {
 
 class BinaryTree<Key, Value> {
   readonly root;
-  constructor(key: Key, value: Value= key) {
+  constructor(key: Key, value: Value) {
     this.root = new BinaryTreeNode(key, value);
   }
 
@@ -56,7 +62,7 @@ class BinaryTree<Key, Value> {
   insert(
     parentKey: Key,
     childKey: Key,
-    childValue: Value = childKey,
+    childValue: Value,
     { left, right } = { left: true, right: true },
   ) {
     for (const node of this.preOrderTraversal()) {

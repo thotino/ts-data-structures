@@ -1,4 +1,5 @@
-const { HashTable } = require(".");
+import HashTable from ".";
+import { describe, beforeAll, test, expect } from "vitest";
 
 describe("[unit] HashTable", () => {
   const hashTable = new HashTable();

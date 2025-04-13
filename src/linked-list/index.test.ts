@@ -1,4 +1,5 @@
-const { LinkedList } = require(".");
+import LinkedList from ".";
+import { describe, beforeAll, test, expect } from "vitest";
 
 describe("[unit] LinkedList", () => {
   const list = new LinkedList();

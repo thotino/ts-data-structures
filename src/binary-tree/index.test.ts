@@ -1,4 +1,5 @@
-const { BinaryTree } = require(".");
+import BinaryTree from ".";
+import { describe, beforeAll, test, expect } from "vitest";
 
 describe("[unit] BinaryTree", () => {
   const tree = new BinaryTree(1, "AB");
@@ -27,7 +28,7 @@ describe("[unit] BinaryTree", () => {
     expect(tree.find(12).isLeaf).toBeFalsy();
     expect(tree.find(121).isLeaf).toBeTruthy();
     expect(tree.find(121).parent.value).toEqual("BC");
-    expect(tree.find(12).left).toBeNull();
+    expect(tree.find(12).left).toBeUndefined();
     expect(tree.find(12).right.value).toEqual("BG");
   });
   test("Should remove leaves", () => {

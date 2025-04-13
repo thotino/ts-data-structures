@@ -5,7 +5,7 @@
 class BinaryTreeNode<Key, Value> {
   key: Key;
   value: Value;
-  parent?: BinaryTreeNode<Key, Value>;
+  parent?: BinaryTreeNode<Key, Value> | null;
   left?: BinaryTreeNode<Key, Value>;
   right?: BinaryTreeNode<Key, Value>;
   constructor(
@@ -37,7 +37,7 @@ class BinaryTree<Key, Value> {
     this.root = new BinaryTreeNode(key, value);
   }
 
-  *preOrderTraversal(node = this.root) {
+  *preOrderTraversal(node = this.root): Generator<BinaryTreeNode<Key, Value>> {
     yield node;
     if (node.hasChildren) {
       if (node.left) yield* this.preOrderTraversal(node.left);
@@ -45,7 +45,7 @@ class BinaryTree<Key, Value> {
     }
   }
 
-  *postOrderTraversal(node = this.root) {
+  *postOrderTraversal(node = this.root): Generator<BinaryTreeNode<Key, Value>> {
     // if (node.hasChildren) {
     if (node.left) yield* this.postOrderTraversal(node.left);
     if (node.right) yield* this.postOrderTraversal(node.right);
@@ -53,7 +53,7 @@ class BinaryTree<Key, Value> {
     yield node;
   }
 
-  *inOrderTraversal(node = this.root) {
+  *inOrderTraversal(node = this.root): Generator<BinaryTreeNode<Key, Value>> {
     if (node.left) yield* this.inOrderTraversal(node.left);
     yield node;
     if (node.right) yield* this.inOrderTraversal(node.right);
@@ -86,11 +86,11 @@ class BinaryTree<Key, Value> {
 
   remove(key: Key) {
     for (const node of this.preOrderTraversal()) {
-      if (node.left.key === key) {
+      if (node.left?.key === key) {
         node.left = null;
         return true;
       }
-      if (node.right.key === key) {
+      if (node.right?.key === key) {
         node.right = null;
         return true;
       }

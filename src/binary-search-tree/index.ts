@@ -37,7 +37,9 @@ class BinarySearchTree<Key, Value> {
     this.root = new BinarySearchTreeNode(key, value);
   }
 
-  *preOrderTraversal(node = this.root) {
+  *preOrderTraversal(
+    node = this.root,
+  ): Generator<BinarySearchTreeNode<Key, Value>> {
     yield node;
     if (node.hasChildren) {
       if (node.left) yield* this.preOrderTraversal(node.left);
@@ -45,7 +47,9 @@ class BinarySearchTree<Key, Value> {
     }
   }
 
-  *postOrderTraversal(node = this.root) {
+  *postOrderTraversal(
+    node = this.root,
+  ): Generator<BinarySearchTreeNode<Key, Value>> {
     if (node.hasChildren) {
       if (node.left) yield* this.postOrderTraversal(node.left);
       if (node.right) yield* this.postOrderTraversal(node.right);
@@ -53,7 +57,9 @@ class BinarySearchTree<Key, Value> {
     yield node;
   }
 
-  *inOrderTraversal(node = this.root) {
+  *inOrderTraversal(
+    node = this.root,
+  ): Generator<BinarySearchTreeNode<Key, Value>> {
     if (node.left) yield* this.inOrderTraversal(node.left);
     yield node;
     if (node.right) yield* this.inOrderTraversal(node.right);
@@ -64,13 +70,13 @@ class BinarySearchTree<Key, Value> {
     while (true) {
       if (node.key === key) return false;
       if (node.key > key) {
-        if (node.left !== null) node = node.left;
+        if (node.left != null) node = node.left;
         else {
           node.left = new BinarySearchTreeNode(key, value, node);
           return true;
         }
       } else if (node.key < key) {
-        if (node.right !== null) node = node.right;
+        if (node.right != null) node = node.right;
         else {
           node.right = new BinarySearchTreeNode(key, value, node);
           return true;
@@ -78,9 +84,9 @@ class BinarySearchTree<Key, Value> {
       }
     }
   }
-  
+
   has(key: Key) {
-    for (let node of this.postOrderTraversal()) {
+    for (const node of this.postOrderTraversal()) {
       if (node.key === key) return true;
     }
     return false;

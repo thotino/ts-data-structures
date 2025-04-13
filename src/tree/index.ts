@@ -29,7 +29,7 @@ class Tree<Key, Value> {
     this.root = new TreeNode(key, value);
   }
 
-  *preOrderTraversal(node = this.root) {
+  *preOrderTraversal(node = this.root): Generator<TreeNode<Key, Value>> {
     yield node;
     if (node.hasChildren) {
       for (const child of node.children) {
@@ -38,7 +38,7 @@ class Tree<Key, Value> {
     }
   }
 
-  *postOrderTraversal(node = this.root) {
+  *postOrderTraversal(node = this.root): Generator<TreeNode<Key, Value>> {
     if (node.hasChildren) {
       for (const child of node.children) {
         yield* this.postOrderTraversal(child);
@@ -60,7 +60,9 @@ class Tree<Key, Value> {
 
   remove(key: Key) {
     for (const node of this.postOrderTraversal()) {
-      const filtered = node.children.filter((child: TreeNode<Key, Value>) => child.key !== key);
+      const filtered = node.children.filter(
+        (child: TreeNode<Key, Value>) => child.key !== key,
+      );
       if (filtered.length !== node.children.length) {
         node.children = filtered;
         return true;

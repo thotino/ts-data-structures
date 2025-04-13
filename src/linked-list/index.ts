@@ -5,7 +5,7 @@
  * The first element in the linked list is the head and the last element is the tail.
  */
 class LinkedList<Type> {
-  nodes: { value: Type, next: unknown }[];
+  nodes: { value: Type; next: unknown }[];
   constructor() {
     this.nodes = [];
   }

@@ -3,7 +3,7 @@
  * @description A graph is a data structure consisting of a set of nodes or vertices and a set of edges that represent connections between those nodes
  */
 class Graph<Key, Value> {
-  nodes: {key: Key, value: Value}[];
+  nodes: { key: Key; value: Value }[];
   edges;
   directed;
   constructor(directed = true) {
@@ -11,8 +11,8 @@ class Graph<Key, Value> {
     this.edges = new Map<
       Key,
       {
-        startingNode: {key: Key, value: Value};
-        targetNode: {key: Key, value: Value};
+        startingNode: { key: Key; value: Value };
+        targetNode: { key: Key; value: Value };
         weight: number;
       }
     >();
@@ -23,7 +23,11 @@ class Graph<Key, Value> {
     this.nodes.push({ key, value: value ?? key });
   }
 
-  addEdge(startingNode, targetNode, weight = 0) {
+  addEdge(
+    startingNode: { key: Key; value: Value },
+    targetNode: { key: Key; value: Value },
+    weight = 0,
+  ) {
     let key = JSON.stringify({ startingNode, targetNode }) as Key;
     this.edges.set(key, { startingNode, targetNode, weight });
     if (!this.directed) {
@@ -65,22 +69,31 @@ class Graph<Key, Value> {
   }
 
   findNode(key: Key) {
-    return this.nodes.find(({ key: curKey }) => {
-      curKey === key;
-    });
+    return this.nodes.find(({ key: curKey }) => curKey === key);
   }
 
-  hasEdge(startingNode, targetNode, weight = 0) {
+  hasEdge(
+    startingNode: { key: Key; value: Value },
+    targetNode: { key: Key; value: Value },
+    weight = 0,
+  ) {
     const key = JSON.stringify({ startingNode, targetNode }) as Key;
     return this.edges.has(key);
   }
 
-  setEdgeWeight(startingNode, targetNode, weight) {
+  setEdgeWeight(
+    startingNode: { key: Key; value: Value },
+    targetNode: { key: Key; value: Value },
+    weight: number,
+  ) {
     const key = JSON.stringify({ startingNode, targetNode }) as Key;
     this.edges.set(key, { startingNode, targetNode, weight });
   }
 
-  getEdgeWeight(startingNode, targetNode) {
+  getEdgeWeight(
+    startingNode: { key: Key; value: Value },
+    targetNode: { key: Key; value: Value },
+  ) {
     const key = JSON.stringify({ startingNode, targetNode }) as Key;
     const { weight } = this.edges.get(key);
     return weight;
@@ -88,7 +101,7 @@ class Graph<Key, Value> {
 
   adjacent(key: Key) {
     return [...this.edges.values()].reduce(
-      (acc, { startingNode, targetNode }) => {
+      (acc: { key: Key; value: Value }[], { startingNode, targetNode }) => {
         if (startingNode === key) acc.push(targetNode);
         return acc;
       },

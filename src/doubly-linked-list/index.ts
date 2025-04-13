@@ -4,7 +4,7 @@
  */
 
 class DoublyLinkedList<Type> {
-  nodes: {value: Type, next: unknown, previous: unknown}[];
+  nodes: { value: Type; next: unknown; previous: unknown }[];
   constructor() {
     this.nodes = [];
   }

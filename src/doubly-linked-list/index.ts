@@ -2,9 +2,9 @@
  * @see https://www.30secondsofcode.org/articles/s/js-data-structures-doubly-linked-list
  * @description A doubly linked list is a linear data structure that represents a collection of elements, where each element points both to the next and the previous one
  */
-
+import type { DoublyLinkedListNode } from "../types/node";
 class DoublyLinkedList<Type> {
-  nodes: { value: Type; next: unknown; previous: unknown }[];
+  nodes: DoublyLinkedListNode<Type>[];
   constructor() {
     this.nodes = [];
   }
@@ -14,11 +14,11 @@ class DoublyLinkedList<Type> {
   }
 
   get head() {
-    return this.size ? this.nodes[0] : null;
+    return this.size != 0 ? this.nodes[0] : null;
   }
 
   get tail() {
-    return this.size ? this.nodes[this.size - 1] : null;
+    return this.size != 0 ? this.nodes[this.size - 1] : null;
   }
 
   insertAt(idx: number, value: Type) {
@@ -56,10 +56,11 @@ class DoublyLinkedList<Type> {
   }
 
   reverse() {
-    this.nodes = this.nodes.reduce((acc, { value }) => {
-      const nextNode = acc[0] || null;
-      const node = { value, next: nextNode, previous: null };
-      if (nextNode) nextNode.previous = node;
+    this.nodes = this.nodes.reduce<DoublyLinkedListNode<Type>[]>((acc, curNode: DoublyLinkedListNode<Type>) => {
+      const value = curNode.value;
+      const nextNode: DoublyLinkedListNode<Type> | null = acc[0] || null;
+      const node: DoublyLinkedListNode<Type> = { value, next: nextNode, previous: null };
+      if (nextNode !== null) nextNode.previous = node;
       return [node, ...acc];
     }, []);
   }

@@ -1,7 +1,7 @@
-import Stack from ".";
 import { describe, test, expect } from "vitest";
+import Stack from ".";
 
-describe("[unit] Stack", () => {
+describe("Stack", () => {
   test("Should be empty at initialization", () => {
     const stack = new Stack();
     expect(stack.isEmpty()).toBeTruthy();

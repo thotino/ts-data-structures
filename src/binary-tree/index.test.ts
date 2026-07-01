@@ -25,11 +25,11 @@ describe("[unit] BinaryTree", () => {
   test("Should check root and leaves", () => {
     expect(tree.root.value).toEqual("AB");
     expect(tree.root.hasChildren).toBeTruthy();
-    expect(tree.find(12).isLeaf).toBeFalsy();
-    expect(tree.find(121).isLeaf).toBeTruthy();
-    expect(tree.find(121).parent.value).toEqual("BC");
-    expect(tree.find(12).left).toBeUndefined();
-    expect(tree.find(12).right.value).toEqual("BG");
+    expect(tree.find(12)?.isLeaf).toBeFalsy();
+    expect(tree.find(121)?.isLeaf).toBeTruthy();
+    expect(tree.find(121)?.parent?.value).toEqual("BC");
+    expect(tree.find(12)?.left).toBeUndefined();
+    expect(tree.find(12)?.right?.value).toEqual("BG");
   });
   test("Should remove leaves", () => {
     tree.remove(12);

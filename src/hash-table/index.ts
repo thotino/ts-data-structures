@@ -3,8 +3,8 @@ interface StringWise {
   charCodeAt: (arg: number) => number;
 }
 class HashTable<Key extends StringWise, Value> {
-  table;
-  size;
+  table: ([Key, Value] | null)[];
+  size: number;
   constructor(length = 127) {
     this.table = new Array(length);
     this.size = 0;
@@ -29,7 +29,7 @@ class HashTable<Key extends StringWise, Value> {
     return this.table[index];
   }
 
-  remove(key: Key) {
+  remove(key: Key): boolean {
     const index = this.hash(key);
     if (this.table[index]) {
       this.table[index] = null;

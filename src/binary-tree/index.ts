@@ -2,12 +2,13 @@
  * @see https://www.30secondsofcode.org/articles/s/js-data-structures-binary-tree
  * @description A binary tree is a data structure consisting of a set of linked nodes that represent a hierarchical tree structure.
  */
-class BinaryTreeNode<Key, Value> {
+import { TreeNodeInterface } from "../types/node";
+class BinaryTreeNode<Key, Value> implements TreeNodeInterface<Key, Value> {
   key: Key;
   value: Value;
   parent?: BinaryTreeNode<Key, Value> | null;
-  left?: BinaryTreeNode<Key, Value>;
-  right?: BinaryTreeNode<Key, Value>;
+  left?: BinaryTreeNode<Key, Value> | null;
+  right?: BinaryTreeNode<Key, Value> | null;
   constructor(
     key: Key,
     value: Value,
@@ -23,7 +24,7 @@ class BinaryTreeNode<Key, Value> {
   }
 
   get isLeaf() {
-    return !this.left && !this.right;
+    return this.left == null && this.right == null;
   }
 
   get hasChildren() {
@@ -63,12 +64,12 @@ class BinaryTree<Key, Value> {
     parentKey: Key,
     childKey: Key,
     childValue: Value,
-    { left, right } = { left: true, right: true },
+    { left, right }: { left?: boolean; right?: boolean } = { left: true, right: true },
   ) {
     for (const node of this.preOrderTraversal()) {
       if (node.key === parentKey) {
-        const canInsertLeft = left && !node.left;
-        const canInsertRight = right && !node.right;
+        const canInsertLeft = left && node.left != null;
+        const canInsertRight = right && node.right != null;
         if (!canInsertLeft && !canInsertRight) return false;
         const newNode = new BinaryTreeNode(childKey, childValue, node);
         if (canInsertLeft) {
@@ -98,12 +99,13 @@ class BinaryTree<Key, Value> {
     return false;
   }
 
-  find(key: Key) {
+  find(key: Key): BinaryTreeNode<Key, Value> | null {
     for (const node of this.preOrderTraversal()) {
       if (node.key === key) {
         return node;
       }
     }
+    return null;
   }
 }
 

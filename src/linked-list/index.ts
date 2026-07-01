@@ -4,8 +4,10 @@
  * A linked list is a linear data structure that represents a collection of elements, where each element points to the next one.
  * The first element in the linked list is the head and the last element is the tail.
  */
+
+import { LinkedListNode } from "../types/node";
 class LinkedList<Type> {
-  nodes: { value: Type; next: unknown }[];
+  nodes: LinkedListNode<Type>[];
   constructor() {
     this.nodes = [];
   }
@@ -15,11 +17,11 @@ class LinkedList<Type> {
   }
 
   get head() {
-    return this.size ? this.nodes[0] : null;
+    return this.size != 0 ? this.nodes[0] : null;
   }
 
   get tail() {
-    return this.size ? this.nodes[this.size - 1] : null;
+    return this.size != 0 ? this.nodes[this.size - 1] : null;
   }
 
   insertAt(idx: number, value: Type) {
@@ -54,7 +56,7 @@ class LinkedList<Type> {
   }
 
   reverse() {
-    this.nodes = this.nodes.reduce(
+    this.nodes = this.nodes.reduce<LinkedListNode<Type>[]>(
       (acc, { value }) => [{ value, next: acc[0] || null }, ...acc],
       [],
     );

@@ -1,18 +1,18 @@
 import Graph from ".";
 import { describe, beforeAll, test, expect } from "vitest";
 
-describe("[unit] Graph", () => {
+describe("Graph", () => {
   const graph = new Graph();
   beforeAll(() => {
-    graph.addNode("a");
-    graph.addNode("b");
-    graph.addNode("c");
-    graph.addNode("d");
+    graph.addNode("a", "a");
+    graph.addNode("b", "b");
+    graph.addNode("c", "c");
+    graph.addNode("d", "d");
 
-    graph.addEdge("a", "c");
-    graph.addEdge("b", "c");
-    graph.addEdge("c", "b");
-    graph.addEdge("d", "a");
+    graph.addEdge({ key: "a", value: "a" }, { key: "c", value: "c" });
+    graph.addEdge({ key: "b", value: "b" }, { key: "c", value: "c" });
+    graph.addEdge({ key: "c", value: "c" }, { key: "b", value: "b" });
+    graph.addEdge({ key: "d", value: "d" }, { key: "a", value: "a" });
   });
 
   test("Should have nodes", () => {
@@ -40,8 +40,8 @@ describe("[unit] Graph", () => {
     expect(graph.outdegree("c")).toEqual(1);
   });
   test("Should check if edge exists", () => {
-    expect(graph.hasEdge("d", "a")).toBeTruthy();
-    expect(graph.hasEdge("a", "d")).toBeFalsy();
+    expect(graph.hasEdge({ key: "d", value: "d" }, { key: "a", value: "a" })).toBeTruthy();
+    expect(graph.hasEdge({ key: "a", value: "a" }, { key: "d", value: "d" })).toBeFalsy();
   });
   test("Should remove edge", () => {
     graph.removeEdge("c", "b");
@@ -65,7 +65,7 @@ describe("[unit] Graph", () => {
     ).toStrictEqual(["d => a"]);
   });
   test("Should set edge weight", () => {
-    graph.setEdgeWeight("d", "a", 5);
-    expect(graph.getEdgeWeight("d", "a")).toEqual(5);
+    graph.setEdgeWeight({key: "d", value: "d"}, {key: "a", value: "a"}, 5);
+    expect(graph.getEdgeWeight({key: "d", value: "d"}, {key: "a", value: "a"})).toEqual(5);
   });
 });

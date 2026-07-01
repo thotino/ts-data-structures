@@ -1,7 +1,7 @@
-import Tree from ".";
 import { describe, beforeAll, test, expect } from "vitest";
+import Tree from ".";
 
-describe("[unit] Tree", () => {
+describe("Tree", () => {
   const tree = new Tree(1, "AB");
   beforeAll(() => {
     tree.insert(1, 11, "AC");
@@ -21,9 +21,9 @@ describe("[unit] Tree", () => {
   });
 
   test("Should find leaves", () => {
-    expect(tree.find(12).isLeaf).toBeFalsy();
-    expect(tree.find(121).isLeaf).toBeTruthy();
-    expect(tree.find(121).parent.value).toEqual("BC");
+    expect(tree.find(12)?.isLeaf).toBeFalsy();
+    expect(tree.find(121)?.isLeaf).toBeTruthy();
+    expect(tree.find(121)?.parent?.value).toEqual("BC");
   });
 
   test("Should remove a node", () => {

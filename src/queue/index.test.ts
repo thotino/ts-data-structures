@@ -1,5 +1,5 @@
-import Queue from ".";
 import { describe, test, expect } from "vitest";
+import Queue from ".";
 
 describe("[unit] Queue", () => {
   test("Should be empty at initialization", () => {

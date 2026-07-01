@@ -1,4 +1,4 @@
-import HashTable from ".";
+import HashTable from "./index";
 import { describe, beforeAll, test, expect } from "vitest";
 
 describe("[unit] HashTable", () => {

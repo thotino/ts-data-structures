@@ -1,7 +1,7 @@
 import DoublyLinkedList from ".";
 import { describe, beforeAll, test, expect } from "vitest";
 
-describe("[unit] DoublyLinkedList", () => {
+describe("DoublyLinkedList", () => {
   const list = new DoublyLinkedList();
   beforeAll(() => {
     list.insertFirst(1);
@@ -12,18 +12,18 @@ describe("[unit] DoublyLinkedList", () => {
   });
   test("Should have elements and their properties", () => {
     expect(list.size).toEqual(5);
-    expect(list.head.value).toEqual(3);
-    expect(list.head.next.value).toEqual(2);
-    expect(list.tail.value).toEqual(4);
-    expect(list.tail.previous.value).toEqual(5);
+    expect(list.head!.value).toEqual(3);
+    expect(list.head!.next?.value).toEqual(2);
+    expect(list.tail!.value).toEqual(4);
+    expect(list.tail!.previous!.value).toEqual(5);
     expect([...list.nodes.map((node) => node.value)]).toStrictEqual([
       3, 2, 1, 5, 4,
     ]);
   });
   test("Should remove an element", () => {
     list.removeAt(1);
-    expect(list.getAt(1).value).toEqual(1);
-    expect(list.head.next.value).toEqual(1);
+    expect(list.getAt(1)?.value).toEqual(1);
+    expect(list.head!.next?.value).toEqual(1);
     expect([...list.nodes.map((node) => node.value)]).toStrictEqual([
       3, 1, 5, 4,
     ]);

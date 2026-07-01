@@ -2,7 +2,8 @@
  * @see https://www.30secondsofcode.org/articles/s/js-data-structures-tree
  * @description A tree is a data structure consisting of a set of linked nodes that represent a hierarchical tree structure.
  */
-class TreeNode<Key, Value> {
+import { TreeNodeInterface } from "../types/node";
+class TreeNode<Key, Value> implements TreeNodeInterface<Key, Value> {
   key;
   value;
   parent?: TreeNode<Key, Value>;
@@ -14,11 +15,11 @@ class TreeNode<Key, Value> {
     this.children = [];
   }
 
-  get isLeaf() {
+  get isLeaf(): boolean {
     return this.children.length === 0;
   }
 
-  get hasChildren() {
+  get hasChildren(): boolean {
     return !this.isLeaf;
   }
 }
@@ -47,7 +48,7 @@ class Tree<Key, Value> {
     yield node;
   }
 
-  insert(parentKey: Key, key: Key, value: Value) {
+  insert(parentKey: Key, key: Key, value: Value): boolean {
     for (const node of this.preOrderTraversal()) {
       if (node.key === parentKey) {
         const newNode = new TreeNode(key, value, node);
@@ -58,7 +59,7 @@ class Tree<Key, Value> {
     return false;
   }
 
-  remove(key: Key) {
+  remove(key: Key): boolean {
     for (const node of this.postOrderTraversal()) {
       const filtered = node.children.filter(
         (child: TreeNode<Key, Value>) => child.key !== key,
@@ -71,9 +72,10 @@ class Tree<Key, Value> {
     return false;
   }
 
-  find(key: Key) {
-    return [...this.preOrderTraversal()].find(
-      ({ key: curKey }) => curKey === key,
+  find(key: Key): TreeNode<Key, Value> | null {
+    return (
+      [...this.preOrderTraversal()].find(({ key: curKey }) => curKey === key) ??
+      null
     );
   }
 }

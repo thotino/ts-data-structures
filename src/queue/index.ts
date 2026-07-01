@@ -2,13 +2,13 @@
  * https://www.30secondsofcode.org/articles/s/js-data-structures-queue
  * @description A queue is a linear data structure that behaves like a real-world queue.
  */
-class Queue<Type> {
-  items: Type[];
+class Queue<Item> {
+  items: Item[];
   constructor() {
     this.items = [];
   }
 
-  enqueue(item: Type) {
+  enqueue(item: Item) {
     this.items.push(item);
   }
 
@@ -16,11 +16,11 @@ class Queue<Type> {
     this.items.shift();
   }
 
-  peek() {
+  peek(): Item {
     return this.items[0];
   }
 
-  isEmpty() {
+  isEmpty(): boolean {
     return this.items.length === 0;
   }
 }

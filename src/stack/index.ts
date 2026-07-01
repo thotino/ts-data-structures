@@ -2,13 +2,13 @@
  * @see https://www.30secondsofcode.org/articles/s/js-data-structures-stack
  * @description A stack is a linear data structure that behaves like a real-world stack of items.
  */
-class Stack<Type> {
-  items: Type[];
+class Stack<Item> {
+  items: Item[];
   constructor() {
     this.items = [];
   }
 
-  push(item: Type) {
+  push(item: Item) {
     this.items.unshift(item);
   }
 
@@ -16,11 +16,11 @@ class Stack<Type> {
     this.items.shift();
   }
 
-  peek() {
+  peek(): Item {
     return this.items[0];
   }
 
-  isEmpty() {
+  isEmpty(): boolean {
     return this.items.length === 0;
   }
 }

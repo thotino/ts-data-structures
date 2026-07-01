@@ -1,10 +1,24 @@
 {
   "compileOnSave": true,
-  "extends": "@tsconfig/node22/tsconfig.json",
+  // "extends": "@tsconfig/node22/tsconfig.json",
   "compilerOptions": {
     "sourceMap": true,
     "sourceRoot": "./src",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "noEmitOnError": true,
+    "module": "es2022",
+    "target": "es2022",
+    "moduleResolution": "node10",
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "allowUnreachableCode": false
   },
+  "tsc-alias": {
+    "resolveFullPaths": true,
+    "verbose": true
+  },
+  "include": ["./src"],
   "exclude": ["./dist"]
 }
